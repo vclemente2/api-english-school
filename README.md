@@ -5,7 +5,88 @@ gestão para uma instituição de ensino, especificamente uma escola de idiomas.
 API permite a criação, atualização, consulta e exclusão de informações
 relacionadas aos alunos e turmas.
 
-## Recursos
+## **1 - Configuração da API**
+
+### **Dependências:**
+
+Certifique-se de ter o Node.js e o npm (Node Package Manager) instalados em sua
+máquina.
+
+### **Faça o clone do repositório da API:**
+
+```bash
+git clone https://github.com/vclemente2/api-english-school
+```
+
+### **Navegue até o diretório da API:**
+
+```bash
+cd api-english-school
+```
+
+### **Instale as dependências do projeto:**
+
+```bash
+npm install
+```
+
+### **Configuração do Banco de Dados:**
+
+Certifique-se de ter um banco de dados configurado e acessível para a aplicação.
+Por exemplo, você pode usar o MySQL ou PostgreSQL.
+
+Execute as migrações do banco de dados para criar a estrutura necessária:
+
+```bash
+npx sequelize-cli db:migrate
+```
+
+Execute os seeders para popular o banco de dados com dados iniciais:
+
+```bash
+npx sequelize-cli db:seed:all
+```
+
+### **Configuração das Variáveis de Ambiente:**
+
+Crie um arquivo **.env** na raiz do projeto.
+
+Abra o arquivo .env e adicione as seguintes variáveis de ambiente. Certifique-se
+de substituir as credenciais pelas configurações adequadas:
+
+```Javascript
+# Porta em que a aplicação irá ouvir
+PORT=3000
+
+# Credenciais do banco de dados de desenvolvimento
+DB_HOST='database_host'
+DB_NAME='database_name'
+DB_USER='database_user'
+DB_PASS='database_password'
+DB_PORT='database_port'
+DB_CLIENT='database_dialect'
+```
+
+**Nota:** Certifique-se de substituir as credenciais pelas suas configurações.
+
+Salve o arquivo .env.
+
+### **Executando a API**
+
+Após a instalação das dependências, configuração do banco de dados e das
+variáveis de ambiente, você pode executar a API com o seguinte comando:
+
+```bash
+npm run dev
+```
+
+A API estará disponível em http://localhost:3000.
+
+Isso conclui a configuração da API. Certifique-se de ter configurado
+corretamente todas as variáveis de ambiente e seguido as etapas corretamente
+para garantir um ambiente funcional.
+
+## **2 - Recursos**
 
 A API oferece os seguintes recursos:
 
@@ -28,21 +109,17 @@ A API oferece os seguintes recursos:
   no ID.
 - `DELETE /turmas/{id}`: Exclui uma turma específica com base no ID.
 
-## Autenticação e Autorização
-
-A API Escola de Inglês utiliza autenticação e autorização para garantir que
-apenas usuários autorizados possam acessar e manipular os dados. A autenticação
-é feita por meio de tokens JWT (JSON Web Tokens), que devem ser enviados no
-cabeçalho `Authorization` de cada solicitação.
-
-Alguns recursos da API são restritos a determinadas funções de usuário, como
-administradores ou professores. A autorização é baseada nas permissões
-atribuídas a cada função de usuário. Os endpoints verificam as permissões do
-usuário autenticado antes de permitir o acesso aos recursos.
-
-## Tecnologias Utilizadas
+### Tecnologias Utilizadas
 
 A API Escola de Inglês foi desenvolvida utilizando as seguintes tecnologias:
 
 - Node.js: Plataforma de execução de JavaScript utilizada para construir a API.
-- Express.js: Framework web utilizado para criar os endpoints e
+- Express.js: Framework web utilizado para criar os endpoints e gerenciar as
+  rotas da API. Ele fornece uma maneira simples e eficiente de lidar com as
+  requisições HTTP e as respostas.
+- Sequelize: ORM (Object-Relational Mapping) baseado em Promises para Node.js. O
+  Sequelize facilita a interação com o banco de dados, permitindo definir
+  modelos, consultas e relacionamentos de forma intuitiva.
+- Banco de Dados: A API Escola de Inglês suporta diversos bancos de dados
+  relacionais, como MySQL, PostgreSQL, SQLite, entre outros. Você pode
+  configurar o banco de dados de acordo com as necessidades do seu projeto.
