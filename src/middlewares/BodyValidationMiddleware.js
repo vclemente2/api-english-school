@@ -1,10 +1,10 @@
 class BodyValidation {
   static validate(validationSchema) {
-    return async function (req, res, next) {
+    return async function bodyValidation(req, res, next) {
       try {
         req.body = await validationSchema.validateAsync(req.body);
 
-        next();
+        return next();
       } catch (error) {
         return res.status(422).json({ message: error.message });
       }

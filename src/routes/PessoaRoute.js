@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const PessoaController = require('../controllers/PessoaController');
-const BodyValidation = require('../middlewares/BodyValidation');
+const BodyValidation = require('../middlewares/BodyValidationMiddleware');
 const pessoaSchema = require('../schema/pessoaSchema');
 
 class PessoaRoute {
