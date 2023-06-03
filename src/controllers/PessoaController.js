@@ -1,13 +1,14 @@
-const db = require('../connection/database');
+const PessoaService = require('../services/PessoaService');
 
 class PessoaController {
-  static async findAll(req, res) {
+  static async findAll(_, res) {
     try {
-      const people = await db.Pessoas.findAll();
+      const people = await PessoaService.findPeople();
+
       return res.json(people);
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ message: 'Internal error.' });
+      return res.status(400).json({ message: error.message });
     }
   }
 
@@ -15,10 +16,13 @@ class PessoaController {
     const data = req.body;
 
     try {
-      return res.json(data);
+      await PessoaService.verifyUniqueEmail(data.email);
+      const person = await PessoaService.createPerson(data);
+
+      return res.status(201).json(person);
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ message: 'Internal error.' });
+      return res.status(400).json({ message: error.message });
     }
   }
 }

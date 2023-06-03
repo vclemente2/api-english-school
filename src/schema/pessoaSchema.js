@@ -11,7 +11,7 @@ const pessoaSchema = joi.object({
       'string.pattern.base':
         'The name field must be a text field and cannot contain numbers or special characters.'
     }),
-  ativo: joi.number().integer(),
+  ativo: joi.boolean().default(true),
   email: joi.string().email().trim().required(),
   role: joi
     .string()
