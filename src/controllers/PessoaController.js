@@ -7,8 +7,22 @@ class PessoaController {
 
       return res.json(people);
     } catch (error) {
-      console.log(error);
-      return res.status(400).json({ message: error.message });
+      return res
+        .status(error.statusCode || 500)
+        .json({ message: error.message });
+    }
+  }
+
+  static async findOne(req, res) {
+    const { id } = req.params;
+    try {
+      const person = await PessoaService.findPersonById(id);
+
+      return res.json(person);
+    } catch (error) {
+      return res
+        .status(error.statusCode || 500)
+        .json({ message: error.message });
     }
   }
 
@@ -21,8 +35,9 @@ class PessoaController {
 
       return res.status(201).json(person);
     } catch (error) {
-      console.log(error);
-      return res.status(400).json({ message: error.message });
+      return res
+        .status(error.statusCode || 500)
+        .json({ message: error.message });
     }
   }
 }

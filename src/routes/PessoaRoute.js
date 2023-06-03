@@ -8,6 +8,7 @@ class PessoaRoute {
     this.route = Router();
 
     this.route.get('/', PessoaController.findAll);
+    this.route.get('/:id', PessoaController.findOne);
     this.route.post(
       '/',
       BodyValidation.validate(pessoaSchema),
