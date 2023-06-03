@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const Routes = require('./routes/Routes');
 
 class App {
   constructor() {
@@ -7,8 +8,13 @@ class App {
     this.app.use(cors());
     this.app.use(express.json());
     this.app.get('/', (_, res) => {
-      return res.json({ message: 'server is running' });
+      return res.json({
+        version: '1.0.0',
+        description: 'API de Exemplo',
+        author: 'Nome do Autor'
+      });
     });
+    this.app.use(new Routes().getRoute());
   }
 
   getApp() {
