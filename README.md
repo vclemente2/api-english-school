@@ -3,7 +3,7 @@
 A API Escola de Inglês é uma aplicação desenvolvida para fornecer ferramentas de
 gestão para uma instituição de ensino, especificamente uma escola de idiomas. A
 API permite a criação, atualização, consulta e exclusão de informações
-relacionadas aos alunos e turmas.
+relacionadas aos alunos, docentes e turmas.
 
 ## **1 - Configuração da API**
 
@@ -90,14 +90,16 @@ para garantir um ambiente funcional.
 
 A API oferece os seguintes recursos:
 
-### Alunos
+### Pessoa
 
-- `GET /alunos`: Retorna a lista de todos os alunos matriculados na escola.
-- `GET /alunos/{id}`: Retorna os detalhes de um aluno específico com base no ID.
-- `POST /alunos`: Cria um novo aluno com base nos dados fornecidos.
-- `PUT /alunos/{id}`: Atualiza as informações de um aluno específico com base no
+- `GET /pessoa`: Retorna a lista de todos as pessoas(alunos e docentes)
+  registradas na escola.
+- `GET /pessoa/{id}`: Retorna os detalhes de uma pessoa específica com base no
   ID.
-- `DELETE /alunos/{id}`: Exclui um aluno específico com base no ID.
+- `POST /pessoa`: Cria um novo aluno ou docente com base nos dados fornecidos.
+- `PUT /pessoa/{id}`: Atualiza as informações de um aluno ou docente específico
+  com base no ID.
+- `DELETE /pessoa/{id}`: Exclui uma pessoa específica com base no ID.
 
 ### Turmas
 
