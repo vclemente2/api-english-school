@@ -14,6 +14,12 @@ class PessoaRoute {
       BodyValidation.validate(pessoaSchema),
       PessoaController.create
     );
+    this.route.put(
+      '/:id',
+      BodyValidation.validate(pessoaSchema),
+      PessoaController.update
+    );
+    this.route.delete('/:id', PessoaController.destroy);
   }
 
   getRoute() {

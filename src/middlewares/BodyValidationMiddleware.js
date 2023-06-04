@@ -1,9 +1,15 @@
+const ApiError = require('../errors/ApiError');
+
 class BodyValidation {
   static validate(validationSchema) {
     return async function bodyValidation(req, _, next) {
-      req.body = await validationSchema.validateAsync(req.body);
+      try {
+        req.body = await validationSchema.validateAsync(req.body);
 
-      return next();
+        next();
+      } catch (error) {
+        throw new ApiError(error.message, 422);
+      }
     };
   }
 }

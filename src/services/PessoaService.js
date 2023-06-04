@@ -9,15 +9,21 @@ class PessoaService {
   static async findPersonById(id) {
     const person = await db.Pessoas.findByPk(id);
 
-    if (!person) throw new ApiError('User not found', 404);
+    if (!person) throw new ApiError('Person not found', 404);
 
     return person;
   }
 
-  static async verifyUniqueEmail(email) {
+  static async verifyUniqueEmail(email, id = 0) {
     const emailExists = await db.Pessoas.findOne({ where: { email } });
 
-    if (emailExists) throw new ApiError('Email alredy registered.', 409);
+    if (id) {
+      if (emailExists && emailExists.id !== Number(id)) {
+        throw new ApiError('Email already registered to another person.', 409);
+      }
+    } else if (emailExists) {
+      throw new ApiError('Email already registered.', 409);
+    }
   }
 
   static async createPerson(data) {
@@ -26,6 +32,20 @@ class PessoaService {
     if (!person) throw new ApiError('Internal error.', 500);
 
     return person;
+  }
+
+  static async updatePerson(data, id) {
+    const updatedPerson = await db.Pessoas.update(data, {
+      where: { id }
+    });
+
+    if (!updatedPerson[0]) throw new ApiError('Internal error.', 500);
+  }
+
+  static async deletePerson(id) {
+    const deletedPerson = await db.Pessoas.destroy({ where: { id } });
+
+    if (!deletedPerson) throw new ApiError('Internal error.', 500);
   }
 }
 

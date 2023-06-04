@@ -7,7 +7,7 @@ class Routes {
     this.route.get('/', (_, res) => {
       return res.json({
         version: '1.0.0',
-        description: 'API English School',
+        description: 'English School API',
         author: 'Vinicius Bastos Clemente'
       });
     });

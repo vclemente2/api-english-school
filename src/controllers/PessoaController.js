@@ -23,6 +23,26 @@ class PessoaController {
 
     return res.status(201).json(person);
   }
+
+  static async update(req, res) {
+    const data = req.body;
+    const { id } = req.params;
+
+    await PessoaService.findPersonById(id);
+    await PessoaService.verifyUniqueEmail(data.email, id);
+    await PessoaService.updatePerson(data, id);
+
+    return res.sendStatus(204);
+  }
+
+  static async destroy(req, res) {
+    const { id } = req.params;
+
+    await PessoaService.findPersonById(id);
+    await PessoaService.deletePerson(id);
+
+    return res.sendStatus(204);
+  }
 }
 
 module.exports = PessoaController;
