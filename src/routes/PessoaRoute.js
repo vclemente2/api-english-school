@@ -1,7 +1,10 @@
 const { Router } = require('express');
 const PessoaController = require('../controllers/PessoaController');
 const BodyValidation = require('../middlewares/BodyValidationMiddleware');
-const pessoaSchema = require('../schema/pessoaSchema');
+const {
+  createPessoaSchema,
+  updatePessoaSchema
+} = require('../schema/pessoaSchema');
 
 class PessoaRoute {
   constructor() {
@@ -11,12 +14,12 @@ class PessoaRoute {
     this.route.get('/:id', PessoaController.findOne);
     this.route.post(
       '/',
-      BodyValidation.validate(pessoaSchema),
+      BodyValidation.validate(createPessoaSchema),
       PessoaController.create
     );
-    this.route.put(
+    this.route.patch(
       '/:id',
-      BodyValidation.validate(pessoaSchema),
+      BodyValidation.validate(updatePessoaSchema),
       PessoaController.update
     );
     this.route.delete('/:id', PessoaController.destroy);

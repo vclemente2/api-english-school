@@ -29,7 +29,7 @@ class PessoaController {
     const { id } = req.params;
 
     await PessoaService.findPersonById(id);
-    await PessoaService.verifyUniqueEmail(data.email, id);
+    if (data.email) await PessoaService.verifyUniqueEmail(data.email, id);
     await PessoaService.updatePerson(data, id);
 
     return res.sendStatus(204);
