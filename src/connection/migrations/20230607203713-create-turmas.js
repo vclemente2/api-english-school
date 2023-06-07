@@ -1,4 +1,3 @@
-'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -12,6 +11,26 @@ module.exports = {
       data_inicio: {
         type: Sequelize.DATEONLY
       },
+      docente_id: {
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'Pessoas'
+          },
+          key: 'id'
+        },
+        type: Sequelize.INTEGER
+      },
+      nivel_id: {
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'Niveis'
+          },
+          key: 'id'
+        },
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -22,7 +41,7 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('Turmas');
   }
 };
