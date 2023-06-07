@@ -35,16 +35,9 @@ class PessoaService {
   }
 
   static async updatePerson(data, id) {
-    const person = await this.findPersonById(id);
-
-    if (!person) throw new ApiError('Internal error.', 500);
-
-    const updatedPerson = await db.Pessoas.update(
-      { ...person, ...data },
-      {
-        where: { id }
-      }
-    );
+    const updatedPerson = await db.Pessoas.update(data, {
+      where: { id }
+    });
 
     if (!updatedPerson[0]) throw new ApiError('Internal error.', 500);
   }
