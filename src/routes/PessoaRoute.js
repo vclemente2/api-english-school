@@ -10,13 +10,13 @@ class PessoaRoute {
   constructor() {
     this.route = Router();
 
-    this.route.get('/', PessoaController.findAll);
-    this.route.get('/:id', PessoaController.findOne);
     this.route.post(
       '/',
       BodyValidation.validate(createPessoaSchema),
       PessoaController.create
     );
+    this.route.get('/', PessoaController.findAll);
+    this.route.get('/:id', PessoaController.findOne);
     this.route.patch(
       '/:id',
       BodyValidation.validate(updatePessoaSchema),

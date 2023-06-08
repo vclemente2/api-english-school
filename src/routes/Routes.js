@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const PessoaRoute = require('./PessoaRoute');
+const NivelRoute = require('./NivelRoute');
 
 class Routes {
   constructor() {
@@ -12,6 +13,7 @@ class Routes {
       });
     });
     this.route.use('/pessoa', new PessoaRoute().getRoute());
+    this.route.use('/nivel', new NivelRoute().getRoute());
   }
 
   getRoute() {
