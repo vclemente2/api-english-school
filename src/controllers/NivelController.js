@@ -14,6 +14,25 @@ class NivelController {
 
     return res.status(201).json(level);
   }
+
+  static async update(req, res) {
+    const data = req.body;
+    const { id } = req.params;
+
+    await NivelService.findLevelById(id);
+    await NivelService.updateLevel(data, id);
+
+    return res.sendStatus(204);
+  }
+
+  static async destroy(req, res) {
+    const { id } = req.params;
+
+    await NivelService.findLevelById(id);
+    await NivelService.deleteLevel(id);
+
+    return res.sendStatus(204);
+  }
 }
 
 module.exports = NivelController;

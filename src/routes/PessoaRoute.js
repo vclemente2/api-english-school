@@ -17,7 +17,7 @@ class PessoaRoute {
     );
     this.route.get('/', PessoaController.findAll);
     this.route.get('/:id', PessoaController.findOne);
-    this.route.patch(
+    this.route.put(
       '/:id',
       BodyValidation.validate(updatePessoaSchema),
       PessoaController.update

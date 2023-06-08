@@ -12,8 +12,12 @@ class NivelRoute {
       NivelController.create
     );
     this.route.get('/', NivelController.findAll);
-    this.route.put('/');
-    this.route.delete('/');
+    this.route.put(
+      '/:id',
+      BodyValidation.validate(nivelSchema),
+      NivelController.update
+    );
+    this.route.delete('/:id', NivelController.destroy);
   }
 
   getRoute() {
