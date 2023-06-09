@@ -43,6 +43,29 @@ class PessoaController {
 
     return res.sendStatus(204);
   }
+
+  static async createEnroll(req, res) {
+    const { personId } = req.params;
+    const data = req.body;
+
+    const enroll = await PessoaService.createEnroll(data, Number(personId));
+
+    return res.status(201).json(enroll);
+  }
+
+  static async findAllEnrollments(_, res) {
+    const enrollments = await PessoaService.findEnrollments();
+
+    return res.json(enrollments);
+  }
+
+  static async findOneEnroll(req, res) {
+    const { enrollId } = req.params;
+
+    const enroll = await PessoaService.findEnrollById(enrollId);
+
+    return res.json(enroll);
+  }
 }
 
 module.exports = PessoaController;

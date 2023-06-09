@@ -5,10 +5,18 @@ const {
   createPessoaSchema,
   updatePessoaSchema
 } = require('../schema/pessoaSchema');
+const { createMatriculaSchema } = require('../schema/matriculaSchema');
 
 class PessoaRoute {
   constructor() {
     this.route = Router();
+    this.route.post(
+      '/:personId/matricula',
+      BodyValidation.validate(createMatriculaSchema),
+      PessoaController.createEnroll
+    );
+    this.route.get('/matricula', PessoaController.findAllEnrollments);
+    this.route.get('/matricula/:enrollId', PessoaController.findOneEnroll);
 
     this.route.post(
       '/',

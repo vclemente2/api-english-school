@@ -50,6 +50,33 @@ class PessoaService {
 
     if (!deletedPerson) throw new ApiError('Internal error.', 500);
   }
+
+  static async createEnroll(data, personId) {
+    await this.findPersonById(personId);
+    const enroll = await db.Matriculas.create({
+      ...data,
+      estudante_id: personId
+    });
+
+    if (!enroll) throw new ApiError('Internal error.', 500);
+
+    return enroll;
+  }
+
+  static async findEnrollments() {
+    return db.Matriculas.findAll({ include: 'estudante' });
+  }
+
+  static async findEnrollById(id) {
+    const enroll = await db.Matriculas.findOne({
+      where: { id },
+      include: ['estudante', 'turma']
+    });
+
+    if (!enroll) throw new ApiError('Enroll not found', 404);
+
+    return enroll;
+  }
 }
 
 module.exports = PessoaService;
