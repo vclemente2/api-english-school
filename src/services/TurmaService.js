@@ -7,7 +7,10 @@ class TurmaService {
   }
 
   static async findClassById(id) {
-    const classAt = await db.Turmas.findByPk(id);
+    const classAt = await db.Turmas.findOne({
+      where: { id },
+      include: ['matricula', 'docente', 'nivel']
+    });
 
     if (!classAt) throw new ApiError('Class not found', 404);
 

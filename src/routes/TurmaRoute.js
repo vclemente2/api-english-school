@@ -15,6 +15,7 @@ class TurmaRoute {
       TurmaController.create
     );
     this.route.get('/', TurmaController.findAll);
+    this.route.get('/:id', TurmaController.findOne);
     this.route.put(
       '/:id',
       BodyValidation.validate(updateTurmaSchema),

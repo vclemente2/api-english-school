@@ -7,6 +7,14 @@ class TurmaController {
     return res.json(classes);
   }
 
+  static async findOne(req, res) {
+    const { id } = req.params;
+
+    const classAt = await TurmaService.findClassById(id);
+
+    return res.json(classAt);
+  }
+
   static async create(req, res) {
     const data = req.body;
 

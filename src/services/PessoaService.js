@@ -9,7 +9,7 @@ class PessoaService {
   static async findPersonById(id) {
     const person = await db.Pessoas.findOne({
       where: { id },
-      include: 'Turmas'
+      include: 'turmas'
     });
 
     if (!person) throw new ApiError('Person not found', 404);
