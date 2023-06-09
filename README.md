@@ -103,14 +103,14 @@ A API oferece os seguintes recursos:
 
 - `GET /pessoa/matricula`: Retorna a lista de todos as matriculas e seus
   respectivos alunos;
-- `GET /pessoa/matricula/{matriculaId}`: Retorna os detalhes de uma matricula
-  específica com base no ID.
+- `GET /pessoa/{pessoaId}/matricula/{matriculaId}`: Retorna os detalhes de uma
+  matricula específica com base no ID.
 - `POST /pessoa/{pessoaId}/matricula`: Cria uma nova matrícula para um aluno com
   base nos dados fornecidos.
-- `PUT /pessoa/matricula/{matriculaId}`: Atualiza as informações de uma
-  matrícula específica com base no ID.
-- `DELETE /pessoa/matricula/{matriculaId}`: Exclui uma matrícula específica com
-  base no ID.
+- `PUT /pessoa/{pessoaId}/matricula/{matriculaId}`: Atualiza as informações de
+  uma matrícula específica com base no ID.
+- `DELETE /pessoa/{pessoaId}/matricula/{matriculaId}`: Exclui uma matrícula
+  específica com base no ID.
 
 ### Turma
 
