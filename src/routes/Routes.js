@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const PessoaRoute = require('./PessoaRoute');
 const NivelRoute = require('./NivelRoute');
+const TurmaRoute = require('./TurmaRoute');
 
 class Routes {
   constructor() {
@@ -14,6 +15,7 @@ class Routes {
     });
     this.route.use('/pessoa', new PessoaRoute().getRoute());
     this.route.use('/nivel', new NivelRoute().getRoute());
+    this.route.use('/turma', new TurmaRoute().getRoute());
   }
 
   getRoute() {
