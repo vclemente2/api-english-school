@@ -19,13 +19,19 @@ class PessoaRoute {
       PessoaController.createEnroll
     );
     this.route.get('/matricula', PessoaController.findAllEnrollments);
-    this.route.get('/matricula/:enrollId', PessoaController.findOneEnroll);
+    this.route.get(
+      '/:personId/matricula/:enrollId',
+      PessoaController.findOneEnroll
+    );
     this.route.put(
-      '/matricula/:enrollId',
+      '/:personId/matricula/:enrollId',
       BodyValidation.validate(updateMatriculaSchema),
       PessoaController.updateEnroll
     );
-    this.route.delete('/matricula/:enrollId', PessoaController.destroyEnroll);
+    this.route.delete(
+      '/:personId/matricula/:enrollId',
+      PessoaController.destroyEnroll
+    );
 
     this.route.post(
       '/',

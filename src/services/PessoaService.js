@@ -67,9 +67,9 @@ class PessoaService {
     return db.Matriculas.findAll({ include: 'estudante' });
   }
 
-  static async findEnrollById(id) {
+  static async findEnrollById(enrollId, personId) {
     const enroll = await db.Matriculas.findOne({
-      where: { id },
+      where: { id: enrollId, estudante_id: personId },
       include: ['estudante', 'turma']
     });
 
@@ -78,16 +78,21 @@ class PessoaService {
     return enroll;
   }
 
-  static async updateEnroll(data, id) {
+  static async updateEnroll(data, enrollId, personId) {
     const updatedEnroll = await db.Matriculas.update(data, {
-      where: { id }
+      where: {
+        id: enrollId,
+        estudante_id: personId
+      }
     });
 
     if (!updatedEnroll[0]) throw new ApiError('Internal error.', 500);
   }
 
-  static async deleteEnroll(id) {
-    const deletedEnroll = await db.Matriculas.destroy({ where: { id } });
+  static async deleteEnroll(enrollId, personId) {
+    const deletedEnroll = await db.Matriculas.destroy({
+      where: { id: enrollId, estudante_id: personId }
+    });
 
     if (!deletedEnroll) throw new ApiError('Internal error.', 500);
   }

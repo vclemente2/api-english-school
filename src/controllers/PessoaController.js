@@ -60,28 +60,28 @@ class PessoaController {
   }
 
   static async findOneEnroll(req, res) {
-    const { enrollId } = req.params;
+    const { enrollId, personId } = req.params;
 
-    const enroll = await PessoaService.findEnrollById(enrollId);
+    const enroll = await PessoaService.findEnrollById(enrollId, personId);
 
     return res.json(enroll);
   }
 
   static async updateEnroll(req, res) {
     const data = req.body;
-    const { enrollId } = req.params;
+    const { enrollId, personId } = req.params;
 
-    await PessoaService.findEnrollById(enrollId);
-    await PessoaService.updateEnroll(data, enrollId);
+    await PessoaService.findEnrollById(enrollId, personId);
+    await PessoaService.updateEnroll(data, enrollId, personId);
 
     return res.sendStatus(204);
   }
 
   static async destroyEnroll(req, res) {
-    const { enrollId } = req.params;
+    const { enrollId, personId } = req.params;
 
-    await PessoaService.findEnrollById(enrollId);
-    await PessoaService.deleteEnroll(enrollId);
+    await PessoaService.findEnrollById(enrollId, personId);
+    await PessoaService.deleteEnroll(enrollId, personId);
 
     return res.sendStatus(204);
   }
