@@ -66,6 +66,25 @@ class PessoaController {
 
     return res.json(enroll);
   }
+
+  static async updateEnroll(req, res) {
+    const data = req.body;
+    const { enrollId } = req.params;
+
+    await PessoaService.findEnrollById(enrollId);
+    await PessoaService.updateEnroll(data, enrollId);
+
+    return res.sendStatus(204);
+  }
+
+  static async destroyEnroll(req, res) {
+    const { enrollId } = req.params;
+
+    await PessoaService.findEnrollById(enrollId);
+    await PessoaService.deleteEnroll(enrollId);
+
+    return res.sendStatus(204);
+  }
 }
 
 module.exports = PessoaController;

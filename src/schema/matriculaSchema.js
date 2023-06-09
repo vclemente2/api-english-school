@@ -7,7 +7,8 @@ const createMatriculaSchema = joi.object({
 
 const updateMatriculaSchema = joi.object({
   status: joi.string(),
-  turma_id: joi.number().integer()
+  turma_id: joi.number().integer(),
+  estudante_id: joi.number().integer()
 });
 
 module.exports = { createMatriculaSchema, updateMatriculaSchema };

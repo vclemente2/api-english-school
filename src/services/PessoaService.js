@@ -77,6 +77,20 @@ class PessoaService {
 
     return enroll;
   }
+
+  static async updateEnroll(data, id) {
+    const updatedEnroll = await db.Matriculas.update(data, {
+      where: { id }
+    });
+
+    if (!updatedEnroll[0]) throw new ApiError('Internal error.', 500);
+  }
+
+  static async deleteEnroll(id) {
+    const deletedEnroll = await db.Matriculas.destroy({ where: { id } });
+
+    if (!deletedEnroll) throw new ApiError('Internal error.', 500);
+  }
 }
 
 module.exports = PessoaService;
