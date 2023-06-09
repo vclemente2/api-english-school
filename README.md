@@ -3,7 +3,7 @@
 A API Escola de Inglês é uma aplicação desenvolvida para fornecer ferramentas de
 gestão para uma instituição de ensino, especificamente uma escola de idiomas. A
 API permite a criação, atualização, consulta e exclusão de informações
-relacionadas aos alunos, docentes e turmas.
+relacionadas aos alunos, docentes, turmas, matrículas e níveis.
 
 ## **1 - Configuração da API**
 
@@ -90,7 +90,7 @@ para garantir um ambiente funcional.
 
 A API oferece os seguintes recursos:
 
-### Pessoa
+### Pessoa e Matrícula
 
 - `GET /pessoa`: Retorna a lista de todos as pessoas(alunos e docentes)
   registradas na escola.
@@ -101,6 +101,17 @@ A API oferece os seguintes recursos:
   com base no ID.
 - `DELETE /pessoa/{id}`: Exclui uma pessoa específica com base no ID.
 
+- `GET /pessoa/matricula`: Retorna a lista de todos as matriculas e seus
+  respectivos alunos;
+- `GET /pessoa/matricula/{matriculaId}`: Retorna os detalhes de uma matricula
+  específica com base no ID.
+- `POST /pessoa/{pessoaId}/matricula`: Cria uma nova matrícula para um aluno com
+  base nos dados fornecidos.
+- `PUT /pessoa/matricula/{matriculaId}`: Atualiza as informações de uma
+  matrícula específica com base no ID.
+- `DELETE /pessoa/matricula/{matriculaId}`: Exclui uma matrícula específica com
+  base no ID.
+
 ### Turmas
 
 - `GET /turmas`: Retorna a lista de todas as turmas disponíveis na escola.
@@ -110,6 +121,15 @@ A API oferece os seguintes recursos:
 - `PUT /turmas/{id}`: Atualiza as informações de uma turma específica com base
   no ID.
 - `DELETE /turmas/{id}`: Exclui uma turma específica com base no ID.
+
+### Nivel
+
+- `GET /nivel`: Retorna a lista de todas os níveis de curso disponíveis na
+  escola.
+- `POST /nivel`: Cria um novo nível com base nos dados fornecidos.
+- `PUT /nivel/{id}`: Atualiza as informações de um nível específico com base no
+  ID.
+- `DELETE /nivel/{id}`: Exclui um nível específico com base no ID.
 
 ### Tecnologias Utilizadas
 
