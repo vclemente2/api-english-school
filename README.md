@@ -112,17 +112,16 @@ A API oferece os seguintes recursos:
 - `DELETE /pessoa/matricula/{matriculaId}`: Exclui uma matrícula específica com
   base no ID.
 
-### Turmas
+### Turma
 
-- `GET /turmas`: Retorna a lista de todas as turmas disponíveis na escola.
-- `GET /turmas/{id}`: Retorna os detalhes de uma turma específica com base no
+- `GET /turma`: Retorna a lista de todas as turmas disponíveis na escola.
+- `GET /turma/{id}`: Retorna os detalhes de uma turma específica com base no ID.
+- `POST /turma`: Cria uma nova turma com base nos dados fornecidos.
+- `PUT /turma/{id}`: Atualiza as informações de uma turma específica com base no
   ID.
-- `POST /turmas`: Cria uma nova turma com base nos dados fornecidos.
-- `PUT /turmas/{id}`: Atualiza as informações de uma turma específica com base
-  no ID.
-- `DELETE /turmas/{id}`: Exclui uma turma específica com base no ID.
+- `DELETE /turma/{id}`: Exclui uma turma específica com base no ID.
 
-### Nivel
+### Nível
 
 - `GET /nivel`: Retorna a lista de todas os níveis de curso disponíveis na
   escola.
