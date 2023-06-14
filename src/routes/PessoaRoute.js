@@ -13,39 +13,44 @@ const {
 class PessoaRoute {
   constructor() {
     this.route = Router();
-    this.route.post(
-      '/:personId/matricula',
-      BodyValidation.validate(createMatriculaSchema),
-      PessoaController.createEnroll
-    );
-    this.route.get('/matricula', PessoaController.findAllEnrollments);
-    this.route.get(
-      '/:personId/matricula/:enrollId',
-      PessoaController.findOneEnroll
-    );
-    this.route.put(
-      '/:personId/matricula/:enrollId',
-      BodyValidation.validate(updateMatriculaSchema),
-      PessoaController.updateEnroll
-    );
-    this.route.delete(
-      '/:personId/matricula/:enrollId',
-      PessoaController.destroyEnroll
-    );
+    this.route
+      .post(
+        '/:personId/matricula',
+        BodyValidation.validate(createMatriculaSchema),
+        PessoaController.createEnroll
+      )
 
-    this.route.post(
-      '/',
-      BodyValidation.validate(createPessoaSchema),
-      PessoaController.create
-    );
-    this.route.get('/', PessoaController.findAll);
-    this.route.get('/:id', PessoaController.findOne);
-    this.route.put(
-      '/:id',
-      BodyValidation.validate(updatePessoaSchema),
-      PessoaController.update
-    );
-    this.route.delete('/:id', PessoaController.destroy);
+      .get('/matricula', PessoaController.findAllEnrollments)
+
+      .get('/:personId/matricula/:enrollId', PessoaController.findOneEnroll)
+
+      .put(
+        '/:personId/matricula/:enrollId',
+        BodyValidation.validate(updateMatriculaSchema),
+        PessoaController.updateEnroll
+      )
+
+      .delete('/:personId/matricula/:enrollId', PessoaController.destroyEnroll)
+
+      .post(
+        '/',
+        BodyValidation.validate(createPessoaSchema),
+        PessoaController.create
+      )
+
+      .post('/:id/restore', PessoaController.restore)
+
+      .get('/', PessoaController.findAll)
+
+      .get('/:id', PessoaController.findOne)
+
+      .put(
+        '/:id',
+        BodyValidation.validate(updatePessoaSchema),
+        PessoaController.update
+      )
+
+      .delete('/:id', PessoaController.destroy);
   }
 
   getRoute() {

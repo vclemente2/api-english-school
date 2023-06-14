@@ -44,6 +44,16 @@ class PessoaController {
     return res.sendStatus(204);
   }
 
+  static async restore(req, res) {
+    const { id } = req.params;
+
+    await PessoaService.restoreDeletedPerson(id);
+
+    return res
+      .status(201)
+      .json({ message: `The person with id ${id} was restored.` });
+  }
+
   static async createEnroll(req, res) {
     const { personId } = req.params;
     const data = req.body;

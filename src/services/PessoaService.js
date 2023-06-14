@@ -51,6 +51,16 @@ class PessoaService {
     if (!deletedPerson) throw new ApiError('Internal error.', 500);
   }
 
+  static async restoreDeletedPerson(id) {
+    if (isNaN(Number(id))) throw new ApiError('The id must be a number.', 422);
+
+    const restoredPerson = await db.Pessoas.restore({ where: { id } });
+
+    if (restoredPerson === 0)
+      throw new ApiError(`No deleted person with id ${id} was found.`, 404);
+    if (!restoredPerson) throw new ApiError('entrou nesse erro', 500);
+  }
+
   static async createEnroll(data, personId) {
     await this.findPersonById(personId);
     const enroll = await db.Matriculas.create({
