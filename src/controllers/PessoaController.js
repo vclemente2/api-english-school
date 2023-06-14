@@ -95,6 +95,16 @@ class PessoaController {
 
     return res.sendStatus(204);
   }
+
+  static async restoreEnroll(req, res) {
+    const { enrollId, personId } = req.params;
+
+    await PessoaService.restoreDeletedEnroll(enrollId, personId);
+
+    return res
+      .status(201)
+      .json({ message: `The enroll with id ${enrollId} was restored.` });
+  }
 }
 
 module.exports = PessoaController;

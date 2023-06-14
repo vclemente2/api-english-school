@@ -33,6 +33,16 @@ class NivelController {
 
     return res.sendStatus(204);
   }
+
+  static async restore(req, res) {
+    const { id } = req.params;
+
+    await NivelService.restoreDeletedLevel(id);
+
+    return res
+      .status(201)
+      .json({ message: `The level with id ${id} was restored.` });
+  }
 }
 
 module.exports = NivelController;

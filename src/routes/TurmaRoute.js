@@ -9,19 +9,26 @@ const {
 class TurmaRoute {
   constructor() {
     this.route = Router();
-    this.route.post(
-      '/',
-      BodyValidation.validate(createTurmaSchema),
-      TurmaController.create
-    );
-    this.route.get('/', TurmaController.findAll);
-    this.route.get('/:id', TurmaController.findOne);
-    this.route.put(
-      '/:id',
-      BodyValidation.validate(updateTurmaSchema),
-      TurmaController.update
-    );
-    this.route.delete('/:id', TurmaController.destroy);
+    this.route
+      .post(
+        '/',
+        BodyValidation.validate(createTurmaSchema),
+        TurmaController.create
+      )
+
+      .post('/:id/restore', TurmaController.restore)
+
+      .get('/', TurmaController.findAll)
+
+      .get('/:id', TurmaController.findOne)
+
+      .put(
+        '/:id',
+        BodyValidation.validate(updateTurmaSchema),
+        TurmaController.update
+      )
+
+      .delete('/:id', TurmaController.destroy);
   }
 
   getRoute() {

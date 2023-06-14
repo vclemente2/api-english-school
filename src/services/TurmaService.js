@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 const db = require('../connection/database');
 const ApiError = require('../errors/ApiError');
 
@@ -37,6 +38,16 @@ class TurmaService {
     const deletedClass = await db.Turmas.destroy({ where: { id } });
 
     if (!deletedClass) throw new ApiError('Internal error.', 500);
+  }
+
+  static async restoreDeletedClass(id) {
+    if (isNaN(Number(id))) throw new ApiError('The id must be a number.', 422);
+
+    const restoredClass = await db.Turmas.restore({ where: { id } });
+
+    if (restoredClass === 0)
+      throw new ApiError(`No deleted class with id ${id} was found.`, 404);
+    if (!restoredClass) throw new ApiError('Internal error.', 500);
   }
 }
 

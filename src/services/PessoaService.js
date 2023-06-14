@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 const db = require('../connection/database');
 const ApiError = require('../errors/ApiError');
 
@@ -58,7 +59,7 @@ class PessoaService {
 
     if (restoredPerson === 0)
       throw new ApiError(`No deleted person with id ${id} was found.`, 404);
-    if (!restoredPerson) throw new ApiError('entrou nesse erro', 500);
+    if (!restoredPerson) throw new ApiError('Internal error.', 500);
   }
 
   static async createEnroll(data, personId) {
@@ -105,6 +106,22 @@ class PessoaService {
     });
 
     if (!deletedEnroll) throw new ApiError('Internal error.', 500);
+  }
+
+  static async restoreDeletedEnroll(enrollId, personId) {
+    if (isNaN(Number(enrollId)) || isNaN(Number(personId)))
+      throw new ApiError('The id must be a number.', 422);
+
+    const restoredEnroll = await db.Matriculas.restore({
+      where: { id: enrollId, estudante_id: personId }
+    });
+
+    if (restoredEnroll === 0)
+      throw new ApiError(
+        `No deleted enroll with id ${enrollId} was found for this person.`,
+        404
+      );
+    if (!restoredEnroll) throw new ApiError('Internal error.', 500);
   }
 }
 

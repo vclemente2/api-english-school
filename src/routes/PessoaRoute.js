@@ -20,6 +20,11 @@ class PessoaRoute {
         PessoaController.createEnroll
       )
 
+      .post(
+        '/:personId/matricula/:enrollId/restore',
+        PessoaController.restoreEnroll
+      )
+
       .get('/matricula', PessoaController.findAllEnrollments)
 
       .get('/:personId/matricula/:enrollId', PessoaController.findOneEnroll)

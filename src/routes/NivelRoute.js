@@ -6,18 +6,16 @@ const { nivelSchema } = require('../schema/nivelSchema');
 class NivelRoute {
   constructor() {
     this.route = Router();
-    this.route.post(
-      '/',
-      BodyValidation.validate(nivelSchema),
-      NivelController.create
-    );
-    this.route.get('/', NivelController.findAll);
-    this.route.put(
-      '/:id',
-      BodyValidation.validate(nivelSchema),
-      NivelController.update
-    );
-    this.route.delete('/:id', NivelController.destroy);
+    this.route
+      .post('/', BodyValidation.validate(nivelSchema), NivelController.create)
+
+      .post('/:id/restore', NivelController.restore)
+
+      .get('/', NivelController.findAll)
+
+      .put('/:id', BodyValidation.validate(nivelSchema), NivelController.update)
+
+      .delete('/:id', NivelController.destroy);
   }
 
   getRoute() {

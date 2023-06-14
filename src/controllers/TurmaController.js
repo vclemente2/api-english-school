@@ -41,6 +41,16 @@ class TurmaController {
 
     return res.sendStatus(204);
   }
+
+  static async restore(req, res) {
+    const { id } = req.params;
+
+    await TurmaService.restoreDeletedClass(id);
+
+    return res
+      .status(201)
+      .json({ message: `The class with id ${id} was restored.` });
+  }
 }
 
 module.exports = TurmaController;
