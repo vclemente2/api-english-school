@@ -97,6 +97,7 @@ A API oferece os seguintes recursos:
 - `GET /pessoa/{id}`: Retorna os detalhes de uma pessoa específica com base no
   ID.
 - `POST /pessoa`: Cria um novo aluno ou docente com base nos dados fornecidos.
+- `POST /pessoa/{id}/restore`: Restaura um aluno ou docente que foi excluído.
 - `PUT /pessoa/{id}`: Atualiza as informações de um aluno ou docente específico
   com base no ID.
 - `DELETE /pessoa/{id}`: Exclui uma pessoa específica com base no ID.
@@ -107,6 +108,8 @@ A API oferece os seguintes recursos:
   matricula específica com base no ID.
 - `POST /pessoa/{pessoaId}/matricula`: Cria uma nova matrícula para um aluno com
   base nos dados fornecidos.
+- `POST /pessoa/{pessoaId}/matricula/{matriculaId}/restore`: Restaura uma
+  matrícula excluída de um aluno.
 - `PUT /pessoa/{pessoaId}/matricula/{matriculaId}`: Atualiza as informações de
   uma matrícula específica com base no ID.
 - `DELETE /pessoa/{pessoaId}/matricula/{matriculaId}`: Exclui uma matrícula
@@ -117,6 +120,7 @@ A API oferece os seguintes recursos:
 - `GET /turma`: Retorna a lista de todas as turmas disponíveis na escola.
 - `GET /turma/{id}`: Retorna os detalhes de uma turma específica com base no ID.
 - `POST /turma`: Cria uma nova turma com base nos dados fornecidos.
+- `POST /turma/{id}/restore`: Restaura uma turma que foi excluída.
 - `PUT /turma/{id}`: Atualiza as informações de uma turma específica com base no
   ID.
 - `DELETE /turma/{id}`: Exclui uma turma específica com base no ID.
@@ -126,6 +130,7 @@ A API oferece os seguintes recursos:
 - `GET /nivel`: Retorna a lista de todas os níveis de curso disponíveis na
   escola.
 - `POST /nivel`: Cria um novo nível com base nos dados fornecidos.
+- `POST /nivel/{id}/restore`: Restaura um nível que foi excluída.
 - `PUT /nivel/{id}`: Atualiza as informações de um nível específico com base no
   ID.
 - `DELETE /nivel/{id}`: Exclui um nível específico com base no ID.
