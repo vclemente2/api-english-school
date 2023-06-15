@@ -31,6 +31,11 @@ class PessoaRoute {
 
       .get('/:personId/matricula', PessoaController.findPersonActiveEnrollments)
 
+      .get(
+        '/matricula/:classId/active',
+        PessoaController.findAndCountEnrollmetsByClass
+      )
+
       .put(
         '/:personId/matricula/:enrollId',
         BodyValidation.validate(updateMatriculaSchema),

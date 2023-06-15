@@ -103,6 +103,21 @@ class PessoaService {
     return activeEnrollments;
   }
 
+  static async findAndCountEnrollmetsByClass(classId) {
+    const enrollments = await db.Matriculas.findAndCountAll({
+      where: {
+        turma_id: classId,
+        status: 'confirmado'
+      },
+      limit: 20,
+      order: [['estudante_id', 'ASC']]
+    });
+
+    if (!enrollments) throw new ApiError('Internal error.', 500);
+
+    return enrollments;
+  }
+
   static async updateEnroll(data, enrollId, personId) {
     const updatedEnroll = await db.Matriculas.update(data, {
       where: {

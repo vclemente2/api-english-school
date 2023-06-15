@@ -120,6 +120,10 @@ A API oferece os seguintes recursos:
 ### Turma
 
 - `GET /turma`: Retorna a lista de todas as turmas disponíveis na escola.
+  - `Opcional:` Query params para filtro de turma por data.
+    - start: data inicial
+    - end: data final
+    - Exemplo: https://localhost:3000/turma?start=2020-01-30&end=2020-05-15
 - `GET /turma/{id}`: Retorna os detalhes de uma turma específica com base no ID.
 - `POST /turma`: Cria uma nova turma com base nos dados fornecidos.
 - `POST /turma/{id}/restore`: Restaura uma turma que foi excluída.
