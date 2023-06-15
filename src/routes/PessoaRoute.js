@@ -36,6 +36,8 @@ class PessoaRoute {
         PessoaController.findAndCountEnrollmetsByClass
       )
 
+      .get('/matricula/turma/crowded/', PessoaController.findCrowdedClasses)
+
       .put(
         '/:personId/matricula/:enrollId',
         BodyValidation.validate(updateMatriculaSchema),

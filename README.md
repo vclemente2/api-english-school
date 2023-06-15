@@ -110,6 +110,12 @@ A API oferece os seguintes recursos:
   matricula específica com base no ID.
 - `GET /pessoa/matricula/{turmaId}/active`: Retorna a lista de todas as
   matrículas ativas de uma turma com base do ID da turma.
+- `GET /pessoa/matricula/turma/crowded/`: Retorna a lista de todas as turmas que
+  estão lotadas.
+  - `Opcional:` Query params para indicar a quantidade de pessoas que representa
+    uma turma lotada, casa não seja informado, o valor considerado será 10.
+    - max: lotação (quantidade máxima de pessoas por turma)
+    - Exemplo: https://localhost:3000/pessoa/matricula/turma/crowded?max=10
 - `POST /pessoa/{pessoaId}/matricula`: Cria uma nova matrícula para um aluno com
   base nos dados fornecidos.
 - `POST /pessoa/{pessoaId}/matricula/{matriculaId}/restore`: Restaura uma

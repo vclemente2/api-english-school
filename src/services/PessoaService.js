@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-globals */
+const { literal } = require('sequelize');
 const db = require('../connection/database');
 const ApiError = require('../errors/ApiError');
 
@@ -116,6 +117,21 @@ class PessoaService {
     if (!enrollments) throw new ApiError('Internal error.', 500);
 
     return enrollments;
+  }
+
+  static async findCrowdedClasses(maxAmountOfStudents) {
+    const crowdedClasses = await db.Matriculas.findAndCountAll({
+      where: {
+        status: 'confirmado'
+      },
+      attributes: ['turma_id'],
+      group: ['turma_id'],
+      having: literal(`count(turma_id) >= ${maxAmountOfStudents || 10}`)
+    });
+
+    if (!crowdedClasses) throw new ApiError('Internal error.', 500);
+
+    return crowdedClasses.count;
   }
 
   static async updateEnroll(data, enrollId, personId) {

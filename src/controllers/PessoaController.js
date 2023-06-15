@@ -103,6 +103,14 @@ class PessoaController {
     return res.json(enrollments);
   }
 
+  static async findCrowdedClasses(req, res) {
+    const { max } = req.query;
+
+    const crowdedClasses = await PessoaService.findCrowdedClasses(max);
+
+    return res.json(crowdedClasses);
+  }
+
   static async updateEnroll(req, res) {
     const data = req.body;
     const { enrollId, personId } = req.params;
