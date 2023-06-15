@@ -1,8 +1,10 @@
 const TurmaService = require('../services/TurmaService');
 
 class TurmaController {
-  static async findAll(_, res) {
-    const classes = await TurmaService.findClasses();
+  static async findAll(req, res) {
+    const { start, end } = req.query;
+
+    const classes = await TurmaService.findClasses(start, end);
 
     return res.json(classes);
   }

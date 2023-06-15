@@ -29,6 +29,8 @@ class PessoaRoute {
 
       .get('/:personId/matricula/:enrollId', PessoaController.findOneEnroll)
 
+      .get('/:personId/matricula', PessoaController.findPersonActiveEnrollments)
+
       .put(
         '/:personId/matricula/:enrollId',
         BodyValidation.validate(updateMatriculaSchema),
@@ -45,9 +47,9 @@ class PessoaRoute {
 
       .post('/:id/restore', PessoaController.restore)
 
-      .get('/all', PessoaController.findAll)
-
       .get('/', PessoaController.findAllActive)
+
+      .get('/all', PessoaController.findAll)
 
       .get('/:id', PessoaController.findOne)
 

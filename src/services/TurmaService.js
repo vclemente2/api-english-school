@@ -1,10 +1,19 @@
 /* eslint-disable no-restricted-globals */
+const { Op } = require('sequelize');
 const db = require('../connection/database');
 const ApiError = require('../errors/ApiError');
 
 class TurmaService {
-  static async findClasses() {
-    return db.Turmas.findAll();
+  static async findClasses(startDate, endDate) {
+    const filter = { where: {} };
+
+    if (startDate || endDate) filter.where.data_inicio = {};
+    if (startDate) filter.where.data_inicio[Op.gte] = startDate;
+    if (endDate) filter.where.data_inicio[Op.lte] = endDate;
+
+    const classes = await db.Turmas.findAll(filter);
+
+    return classes;
   }
 
   static async findClassById(id) {

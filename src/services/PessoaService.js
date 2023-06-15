@@ -93,6 +93,16 @@ class PessoaService {
     return enroll;
   }
 
+  static async findPersonActiveEnrollments(personId) {
+    const person = await this.findPersonById(personId);
+
+    const activeEnrollments = await person.getEnrolledClasses();
+
+    if (!activeEnrollments) throw new ApiError('Internal error.', 500);
+
+    return activeEnrollments;
+  }
+
   static async updateEnroll(data, enrollId, personId) {
     const updatedEnroll = await db.Matriculas.update(data, {
       where: {

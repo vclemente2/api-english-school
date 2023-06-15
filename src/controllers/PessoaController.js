@@ -83,6 +83,16 @@ class PessoaController {
     return res.json(enroll);
   }
 
+  static async findPersonActiveEnrollments(req, res) {
+    const { personId } = req.params;
+
+    const activeEnrollments = await PessoaService.findPersonActiveEnrollments(
+      personId
+    );
+
+    return res.json(activeEnrollments);
+  }
+
   static async updateEnroll(req, res) {
     const data = req.body;
     const { enrollId, personId } = req.params;
