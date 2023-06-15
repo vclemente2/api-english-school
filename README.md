@@ -92,8 +92,10 @@ A API oferece os seguintes recursos:
 
 ### Pessoa e Matrícula
 
-- `GET /pessoa`: Retorna a lista de todos as pessoas(alunos e docentes)
+- `GET /pessoa`: Retorna a lista de todos as pessoas(alunos e docentes) ativos
   registradas na escola.
+- `GET /pessoa/all`: Retorna a lista de todos as pessoas(alunos e docentes)
+  ativos e inativos registradas na escola.
 - `GET /pessoa/{id}`: Retorna os detalhes de uma pessoa específica com base no
   ID.
 - `POST /pessoa`: Cria um novo aluno ou docente com base nos dados fornecidos.
