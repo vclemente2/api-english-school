@@ -108,6 +108,8 @@ A API oferece os seguintes recursos:
   respectivos alunos;
 - `GET /pessoa/{pessoaId}/matricula/{matriculaId}`: Retorna os detalhes de uma
   matricula específica com base no ID.
+- `GET /pessoa/matricula/{turmaId}/active`: Retorna a lista de todas as
+  matrículas ativas de uma turma com base do ID da turma.
 - `POST /pessoa/{pessoaId}/matricula`: Cria uma nova matrícula para um aluno com
   base nos dados fornecidos.
 - `POST /pessoa/{pessoaId}/matricula/{matriculaId}/restore`: Restaura uma
