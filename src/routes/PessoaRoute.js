@@ -45,7 +45,9 @@ class PessoaRoute {
 
       .post('/:id/restore', PessoaController.restore)
 
-      .get('/', PessoaController.findAll)
+      .get('/all', PessoaController.findAll)
+
+      .get('/', PessoaController.findAllActive)
 
       .get('/:id', PessoaController.findOne)
 

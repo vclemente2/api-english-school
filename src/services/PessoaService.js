@@ -3,8 +3,12 @@ const db = require('../connection/database');
 const ApiError = require('../errors/ApiError');
 
 class PessoaService {
-  static async findPeople() {
+  static async findAllActivePeople() {
     return db.Pessoas.findAll();
+  }
+
+  static async findAllPeople() {
+    return db.Pessoas.scope('all').findAll();
   }
 
   static async findPersonById(id) {

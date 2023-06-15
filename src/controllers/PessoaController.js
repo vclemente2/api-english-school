@@ -1,8 +1,14 @@
 const PessoaService = require('../services/PessoaService');
 
 class PessoaController {
+  static async findAllActive(_, res) {
+    const people = await PessoaService.findAllActivePeople();
+
+    return res.json(people);
+  }
+
   static async findAll(_, res) {
-    const people = await PessoaService.findPeople();
+    const people = await PessoaService.findAllPeople();
 
     return res.json(people);
   }
