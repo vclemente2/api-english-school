@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-const { literal } = require('sequelize');
+const sequelize = require('sequelize');
 const db = require('../connection/database');
 const ApiError = require('../errors/ApiError');
 
@@ -24,7 +24,9 @@ class PessoaService {
   }
 
   static async verifyUniqueEmail(email, id = 0) {
-    const emailExists = await db.Pessoas.findOne({ where: { email } });
+    const emailExists = await db.Pessoas.scope('all').findOne({
+      where: { email }
+    });
 
     if (id) {
       if (emailExists && emailExists.id !== Number(id)) {
@@ -44,11 +46,25 @@ class PessoaService {
   }
 
   static async updatePerson(data, id) {
-    const updatedPerson = await db.Pessoas.update(data, {
-      where: { id }
-    });
+    await db.sequelize.transaction(async (t) => {
+      const updatedPerson = await db.Pessoas.update(
+        data,
+        {
+          where: { id }
+        },
+        { Transaction: t }
+      );
+      if (!updatedPerson) throw new ApiError('Internal error.', 500);
 
-    if (!updatedPerson[0]) throw new ApiError('Internal error.', 500);
+      if (data.ativo === false) {
+        const updatedEnrolls = await db.Matriculas.update(
+          { status: 'cancelado' },
+          { where: { estudante_id: id } },
+          { Transaction: t }
+        );
+        if (!updatedEnrolls) throw new ApiError('Internal error.', 500);
+      }
+    });
   }
 
   static async deletePerson(id) {
@@ -65,6 +81,38 @@ class PessoaService {
     if (restoredPerson === 0)
       throw new ApiError(`No deleted person with id ${id} was found.`, 404);
     if (!restoredPerson) throw new ApiError('Internal error.', 500);
+  }
+
+  static async inactivatePerson(id) {
+    if (isNaN(Number(id))) throw new ApiError('The id must be a number.', 422);
+
+    await this.findPersonById(id);
+
+    await db.sequelize.transaction(async (t) => {
+      await db.Pessoas.update(
+        { ativo: false },
+        { where: { id } },
+        { Transaction: t }
+      );
+      await db.Matriculas.update(
+        { status: 'cancelado' },
+        { where: { estudante_id: id } },
+        { Transaction: t }
+      );
+    });
+  }
+
+  static async reactivatePerson(id) {
+    if (isNaN(Number(id))) throw new ApiError('The id must be a number.', 422);
+
+    const reactivatePerson = await db.Pessoas.scope('all').update(
+      { ativo: true },
+      {
+        where: { id }
+      }
+    );
+    if (!reactivatePerson[0]) throw new ApiError('Person not found', 404);
+    if (!reactivatePerson) throw new ApiError('Internal error.', 500);
   }
 
   static async createEnroll(data, personId) {
@@ -126,7 +174,9 @@ class PessoaService {
       },
       attributes: ['turma_id'],
       group: ['turma_id'],
-      having: literal(`count(turma_id) >= ${maxAmountOfStudents || 10}`)
+      having: sequelize.literal(
+        `count(turma_id) >= ${maxAmountOfStudents || 10}`
+      )
     });
 
     if (!crowdedClasses) throw new ApiError('Internal error.', 500);

@@ -50,6 +50,22 @@ class PessoaController {
     return res.sendStatus(204);
   }
 
+  static async inactivatePerson(req, res) {
+    const { id } = req.params;
+
+    await PessoaService.inactivatePerson(id);
+
+    return res.sendStatus(204);
+  }
+
+  static async reactivatePerson(req, res) {
+    const { id } = req.params;
+
+    await PessoaService.reactivatePerson(id);
+
+    return res.sendStatus(204);
+  }
+
   static async restore(req, res) {
     const { id } = req.params;
 

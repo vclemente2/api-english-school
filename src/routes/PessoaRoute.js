@@ -66,6 +66,10 @@ class PessoaRoute {
         PessoaController.update
       )
 
+      .put('/:id/inactivate', PessoaController.inactivatePerson)
+
+      .put('/:id/reactivate', PessoaController.reactivatePerson)
+
       .delete('/:id', PessoaController.destroy);
   }
 
