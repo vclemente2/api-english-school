@@ -102,6 +102,11 @@ A API oferece os seguintes recursos:
 - `POST /pessoa/{id}/restore`: Restaura um aluno ou docente que foi excluído.
 - `PUT /pessoa/{id}`: Atualiza as informações de um aluno ou docente específico
   com base no ID.
+- `PUT /pessoa/{id}/inactivate`: Atualiza o status para inativo de um aluno ou
+  docente específico com base no ID. Obs.: Todas as matrículas vinculadas ao
+  estudante inativo serão setadas com status de cancelas.
+- `PUT /pessoa/{id}/reactivate`: Atualiza o status para ativo de um aluno ou
+  docente específico com base no ID.
 - `DELETE /pessoa/{id}`: Exclui uma pessoa específica com base no ID.
 
 - `GET /pessoa/matricula`: Retorna a lista de todos as matriculas e seus
